@@ -1,3 +1,19 @@
 ﻿@inherits PageBase
 
-<h1>Profile: @ProfileState.Profile?.Name</h1>
+<h1>Profile: @PageState.Profile?.Name</h1>
+
+
+<EditForm Model="@newProfile" OnValidSubmit="@ChangeProfile">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <div >
+            <label for="profileName">Profile Name</label>
+            <InputText id="profileName" @bind-Value="newProfile.Name" />
+        </div>
+        <div>
+            <button type="submit" >Submit</button>
+        </div>
+    </div>
+</EditForm>
+<br/> <br/>

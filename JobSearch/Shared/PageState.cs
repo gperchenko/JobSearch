@@ -1,17 +1,17 @@
-﻿
-using JobSearch.DBModels;
-
-namespace JobSearch
+﻿namespace JobSearch.Shared
 {
-    public class ProfileState
+    public class PageState
     {
-        public Profile Profile { get; set; }
+        public DBModels.Profile Profile;
+        public event Action? OnChange;
+        
+        public void NotifyStateChanged() => OnChange?.Invoke();
 
-        public void Update(string profileName) 
+        public void UpdateProfile(string? profileName)
         {
             if (Profile == null)
             {
-                Profile = new Profile()
+                Profile = new DBModels.Profile()
                 {
                     Id = 1,
                     Name = profileName
@@ -20,7 +20,7 @@ namespace JobSearch
             else
             {
                 var newId = Profile.Id + 1;
-                Profile = new Profile()
+                Profile = new DBModels.Profile()
                 {
                     Id = newId,
                     Name = profileName

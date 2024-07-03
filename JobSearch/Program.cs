@@ -1,11 +1,12 @@
 using JobSearch;
+using JobSearch.Shared;
 using System.Net.NetworkInformation;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddSingleton<ProfileState>();
+builder.Services.AddSingleton<PageState>();
 
 var app = builder.Build();
 
