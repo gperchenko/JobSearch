@@ -1,10 +1,19 @@
 using JobSearch;
 using JobSearch.Shared;
-using System.Net.NetworkInformation;
+using Microsoft.EntityFrameworkCore;
+using JobSearch.Context;
+using JobSearch.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddDbContext<JobSearchContext>(
+    opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("JObSearchConnection"))
+    .EnableSensitiveDataLogging()
+    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking),
+    ServiceLifetime.Transient);
+builder.Services.AddTransient<IJobSearchService, JobSearchService>();
 
 builder.Services.AddSingleton<PageState>();
 

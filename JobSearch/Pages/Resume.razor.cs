@@ -2,7 +2,7 @@
 
 namespace JobSearch.Pages
 {
-    public  partial class Resume
+    public  partial class Resume : IDisposable
     {
         protected override void OnInitialized()
         {           
