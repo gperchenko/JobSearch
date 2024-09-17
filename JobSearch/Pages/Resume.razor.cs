@@ -11,10 +11,10 @@ namespace JobSearch.Pages
 
         private async Task AddResume()
         {
-            var resume = new Resume() 
-            { 
+            //var resume = new Resume() 
+            //{ 
                 
-            };
+            //};
         }
 
         protected override void OnInitialized()

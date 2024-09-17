@@ -1,6 +1,6 @@
 ﻿namespace JobSearch.Shared
 {
-    public partial class MainLayout
+    public partial class MainLayoutCpnt
     {
     }
 }

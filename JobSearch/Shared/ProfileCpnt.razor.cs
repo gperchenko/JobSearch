@@ -2,7 +2,7 @@
 
 namespace JobSearch.Shared
 {
-    public partial class Profile
+    public partial class ProfileCpnt
     {
         private ProfileUI newProfile = new ProfileUI();
 
