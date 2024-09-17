@@ -1,9 +1,22 @@
-﻿using System.Net.NetworkInformation;
+﻿using JobSearch.UIModels;
+using JobSearch.DBModels;
+
 
 namespace JobSearch.Pages
 {
     public  partial class Resume : IDisposable
     {
+        private List<Resume> resumes = new List<Resume>();
+        private ResumeUI newResume = new ResumeUI();
+
+        private async Task AddResume()
+        {
+            var resume = new Resume() 
+            { 
+                
+            };
+        }
+
         protected override void OnInitialized()
         {           
             PageState.OnChange += ReloadComponent;         

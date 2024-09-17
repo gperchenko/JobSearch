@@ -6,6 +6,7 @@ namespace JobSearch.Context
     public class JobSearchContext : DbContext
     {
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Resume> Resumes { get; set; }
 
         public JobSearchContext(DbContextOptions<JobSearchContext> options)
             : base(options)
@@ -16,11 +17,29 @@ namespace JobSearch.Context
         {
             base.OnModelCreating(builder);
 
-           builder.Entity<Profile>()
+            builder.Entity<Profile>()
                 .ToTable("Profile");
+
+            builder.Entity<Profile>()
+                .Property(n => n.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Entity<Resume>()
+                .ToTable("Resume");
+
+            builder.Entity<Resume>()
+                .Property(n => n.FileName)
+                .IsRequired()
+                .HasMaxLength(150);
+
+            builder.Entity<Resume>()
+                .Property(n => n.Description)
+                .HasMaxLength(150);
         }
 
-        public override int SaveChanges()
+        
+        public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker
                 .Entries()
@@ -35,7 +54,7 @@ namespace JobSearch.Context
                     ((EntityBasse)entityEntry.Entity).CreatedDate = DateTime.Now;
                 }
             }
-            return base.SaveChanges();
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

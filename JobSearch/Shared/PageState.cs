@@ -1,31 +1,13 @@
-﻿namespace JobSearch.Shared
+﻿using JobSearch.Services;
+using Microsoft.AspNetCore.Components;
+
+namespace JobSearch.Shared
 {
     public class PageState
-    {
-        public DBModels.Profile Profile;
+    {     
+        public DBModels.Profile Profile { get; set; }
         public event Action? OnChange;
         
         public void NotifyStateChanged() => OnChange?.Invoke();
-
-        public void UpdateProfile(string? profileName)
-        {
-            if (Profile == null)
-            {
-                Profile = new DBModels.Profile()
-                {
-                    Id = 1,
-                    Name = profileName
-                };
-            }
-            else
-            {
-                var newId = Profile.Id + 1;
-                Profile = new DBModels.Profile()
-                {
-                    Id = newId,
-                    Name = profileName
-                };
-            }
-        }
     }
 }

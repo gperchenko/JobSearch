@@ -3,7 +3,7 @@
 <h1>Profile: @PageState.Profile?.Name</h1>
 
 
-<EditForm Model="@newProfile" OnValidSubmit="@ChangeProfile">
+<EditForm Model="@newProfile" OnValidSubmit="@SwitchProfile">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div>

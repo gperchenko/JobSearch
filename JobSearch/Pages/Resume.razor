@@ -2,5 +2,12 @@
 
 @inherits PageBase
 
-<h3>Resume @PageState.Profile?.Name</h3>
+@if (PageState.Profile == null)
+{
+    <h3>Please select profile first</h3>
+}
+else
+{
+    <h3>Resume hhhh @PageState.Profile?.Name</h3>
+}
 

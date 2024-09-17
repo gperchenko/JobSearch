@@ -6,9 +6,9 @@ namespace JobSearch.Shared
     {
         private ProfileUI newProfile = new ProfileUI();
 
-        private void ChangeProfile()
+        private async Task SwitchProfile()
         {
-            PageState.UpdateProfile(newProfile.Name);
+            PageState.Profile = await JobSearchService.SwitchProfileAsync(newProfile.Name);
             PageState.NotifyStateChanged();
         }
     }
