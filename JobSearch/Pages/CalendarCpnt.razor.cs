@@ -1,6 +1,6 @@
 ﻿namespace JobSearch.Pages
 {
-    public partial class ActivityLog
+    public partial class CalendarCpnt
     {
     }
 }

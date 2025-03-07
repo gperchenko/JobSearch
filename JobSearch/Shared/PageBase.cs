@@ -10,5 +10,10 @@ namespace JobSearch.Shared
 
         [Inject]
         required public PageState PageState { get; init; }
+
+        protected void TuggleVisibleForm()
+        {
+            PageState.ShowForm = !PageState.ShowForm;
+        }
     }
 }

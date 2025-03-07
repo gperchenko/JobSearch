@@ -1,0 +1,19 @@
+﻿@inherits PageBase
+
+<EditForm Model="@newResume" OnValidSubmit="@AddResumeAsync">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <div>
+            <label for="fileName">File Name</label>
+            <InputText id="fileName" @bind-Value="newResume.FileName" />
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <InputText id="description" @bind-Value="newResume.Description" />
+        </div>
+        <div>
+            <button type="submit" >Submit</button>
+        </div>
+    </div>
+</EditForm>

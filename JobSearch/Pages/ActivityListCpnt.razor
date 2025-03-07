@@ -1,0 +1,58 @@
+﻿@page "/ActivityLog"
+
+@inherits PageBase
+
+@if (PageState.Profile == null)
+{
+    <h3>Please select profile first</h3>
+}
+else
+{
+    @if (!PageState.ShowForm)
+    {
+        <button @onclick="()=> TuggleVisibleForm()" type="button">New Activity</button>
+    }
+    else
+    {
+        <button @onclick="()=> TuggleVisibleForm()" type="button">Hide Form</button>
+        <br />
+        <br />
+        <ActivityFormCpnt />
+    }
+  
+    @if (activities is null)
+    {
+        <p><em>Loading ...</em></p>
+    }
+    else
+    {
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Recruiter</th>
+                    <th>Company</th>
+                    <th>Resume</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var activity in activities)
+                {
+                    <tr>
+                        <td>@activity.Date.ToString("yyyy-MM-dd hh:mm")</td>
+                        <td>@activity.Description</td>
+                        <td>@activity.RecruiterContact?.FirstName @activity.RecruiterContact?.LastName</td>
+                        <td>@activity.CompanyContact?.CompanyName</td>
+                        <td>@activity.Resume?.FileName</td>
+                        <td>@activity.Note</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+

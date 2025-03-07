@@ -1,8 +1,8 @@
 ﻿namespace JobSearch.DBModels
 {
-    public class Profile : EntityBasse
+    public class Profile : EntityBase
     {        
         public string? Name { get; set; }
-        public List<Resume> Resumes { get; set; }
+        public ICollection<Resume>? Resumes { get; set; }
     }
 }

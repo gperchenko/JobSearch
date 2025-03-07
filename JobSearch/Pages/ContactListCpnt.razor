@@ -1,0 +1,59 @@
+﻿@page "/ContactList"
+
+@inherits PageBase
+
+@if (PageState.Profile == null)
+{
+    <h3>Please select profile first</h3>
+}
+else
+{
+    @if (!PageState.ShowForm)
+    {      
+        <button @onclick="()=> TuggleVisibleForm()" type="button" >New Contact</button>
+    }
+    else
+    {
+        <button @onclick="()=> TuggleVisibleForm()" type="button">Hide Form</button>
+        <br/><br/>
+       <ContactFormCpnt />
+    }
+
+
+    @if (contacts is null)
+    {
+        <p><em>Loading ...</em></p>
+    }
+    else
+    {
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Company Name</th>
+                    <th>Hiring Comp.</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in contacts)
+                {
+                    <tr>
+                        <td>@contact.FirstName</td>
+                        <td>@contact.LastName</td>
+                        <td>@contact.Email</td>
+                        <td>@contact.Phone</td>
+                        <td>@contact.CompanyName</td>
+                        <td>@contact.IsHiring</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
+
+

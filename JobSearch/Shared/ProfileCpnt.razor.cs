@@ -10,6 +10,8 @@ namespace JobSearch.Shared
         {
             PageState.Profile = await JobSearchService.SwitchProfileAsync(newProfile.Name);
             PageState.NotifyStateChanged();
+
+            newProfile = new ProfileUI();
         }
     }
 }

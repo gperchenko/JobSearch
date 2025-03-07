@@ -1,0 +1,36 @@
+﻿@inherits PageBase
+
+<EditForm Model="@newContact" OnValidSubmit="@AddContactAsync">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <div>
+            <label for="firstName">First Name</label>
+            <InputText id="firstName" @bind-Value="newContact.FirstName" />
+        </div>
+        <div>
+            <label for="lastName">Last Name</label>
+            <InputText id="lastName" @bind-Value="newContact.LastName" />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <InputText id="email" @bind-Value="newContact.Email" />
+        </div>
+        <div>
+            <label for="phone">Phone</label>
+            <InputText id="phone" @bind-Value="newContact.Phone" />
+        </div>
+        <div>
+            <label for="companyName">Company Name</label>
+            <InputText id="companyName" @bind-Value="newContact.CompanyName" />
+        </div>
+        <div>
+            <label for="isHiring">Is Hiring company</label>
+            <InputCheckbox id="isHiring" @bind-Value="newContact.IsHiring"></InputCheckbox>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+</EditForm>
+

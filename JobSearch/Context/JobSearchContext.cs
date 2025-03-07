@@ -7,6 +7,8 @@ namespace JobSearch.Context
     {
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Resume> Resumes { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Activity> Activities { get; set; }
 
         public JobSearchContext(DbContextOptions<JobSearchContext> options)
             : base(options)
@@ -21,7 +23,7 @@ namespace JobSearch.Context
                 .ToTable("Profile");
 
             builder.Entity<Profile>()
-                .Property(n => n.Name)
+                .Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -29,29 +31,74 @@ namespace JobSearch.Context
                 .ToTable("Resume");
 
             builder.Entity<Resume>()
-                .Property(n => n.FileName)
+                .Property(r => r.FileName)
                 .IsRequired()
                 .HasMaxLength(150);
 
             builder.Entity<Resume>()
-                .Property(n => n.Description)
+                .Property(r => r.Description)
                 .HasMaxLength(150);
+
+            builder.Entity<Contact>()
+               .ToTable("Contact");
+
+            builder.Entity<Contact>()
+                .Property(c => c.FirstName)
+                .HasMaxLength(50);
+
+            builder.Entity<Contact>()
+                .Property(c => c.LastName)
+                .HasMaxLength(50);
+
+            builder.Entity<Contact>()
+                .Property(c => c.Email)
+                .HasMaxLength(50);
+
+            builder.Entity<Contact>()
+                .Property(c => c.Phone)
+                .HasMaxLength(50);
+
+            builder.Entity<Contact>()
+                .Property(c => c.CompanyName)
+                .HasMaxLength(150);
+
+            builder.Entity<Activity>()
+               .ToTable("Activity");
+
+            builder.Entity<Activity>()
+                .Property(a => a.Description)
+                .HasMaxLength(100);
+
+            builder.Entity<Activity>()
+                .Property(a => a.Note)
+                .HasMaxLength(250);
+
+            builder.Entity<Activity>()
+                .HasOne(a => a.RecruiterContact)
+                .WithMany(c => c.AcivitiesByRecruiter)
+                .HasForeignKey(a => a.RecruiterContactId);
+
+            builder.Entity<Activity>()
+                .HasOne(a => a.CompanyContact)
+                .WithMany(c => c.ActivitiesByCompany)
+                .HasForeignKey(a => a.CompanyContactId);
+
         }
 
-        
+
         public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker
                 .Entries()
-                .Where(e => e.Entity is EntityBasse && (
+                .Where(e => e.Entity is EntityBase && (
                         e.State == EntityState.Added
                         || e.State == EntityState.Modified));
             foreach (var entityEntry in entries)
             {
-                ((EntityBasse)entityEntry.Entity).UpdatedDate = DateTime.Now;
+                ((EntityBase)entityEntry.Entity).UpdatedDate = DateTime.Now;
                 if (entityEntry.State == EntityState.Added)
                 {
-                    ((EntityBasse)entityEntry.Entity).CreatedDate = DateTime.Now;
+                    ((EntityBase)entityEntry.Entity).CreatedDate = DateTime.Now;
                 }
             }
             return base.SaveChangesAsync(cancellationToken);

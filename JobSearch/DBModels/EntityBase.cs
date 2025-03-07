@@ -1,6 +1,6 @@
 ﻿namespace JobSearch.DBModels
 {
-    public class EntityBasse
+    public class EntityBase
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }

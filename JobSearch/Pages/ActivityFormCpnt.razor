@@ -1,0 +1,53 @@
+﻿@inherits PageBase
+
+<EditForm Model="@newActivity" OnValidSubmit="@AddActivityAsync">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <div>
+            <label for="activityDate">Activity Date</label>
+            <InputText type="datetime-local" id="activityDate" @bind-Value="newActivity.Date" />
+        </div>
+        <div>
+            <label for="activityDescription">Activity Description</label>
+            <InputText id="activityDescription" @bind-Value="newActivity.Description" />
+        </div>
+        <div>
+        <label for="recruiterContactId">Recruiter Contact</label>
+        <InputSelect id="recruiterContactId" @bind-Value="newActivity.RecruiterContactId">
+            <option value="">Select Recruiter Contact</option>
+            @foreach (var recruiterContact in RecruiterContactList)
+            {
+                <option value="@recruiterContact.Id">@recruiterContact.FirstName @recruiterContact.LastName</option>
+            }
+        </InputSelect>
+        </div>
+        <div>
+            <label for="companyContactId">Company Contact</label>
+        <InputSelect id="companyContactId" @bind-Value="newActivity.CompanyContactId">
+            <option value="">Select Company Contact</option>
+            @foreach (var companyContact in CompanyContactList)
+            {
+                <option value="@companyContact.Id">@companyContact.CompanyName</option>
+            }
+        </InputSelect>
+        </div>
+        <div>
+            <label for="resumeId">Resume</label>
+            <InputSelect id="resumeId" @bind-Value="newActivity.ResumeId">
+                <option value="">Select Resume</option>
+                @foreach (var resume in ResumeList)
+                {
+                    <option value="@resume.Id">@resume.FileName</option>
+                }
+            </InputSelect>
+        </div>
+        <div>
+            <label for="activityNote">Activity Note</label>
+            <InputText id="activityNote" @bind-Value="newActivity.Note" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</EditForm>

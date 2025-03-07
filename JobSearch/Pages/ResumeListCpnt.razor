@@ -1,0 +1,50 @@
+﻿@page "/"
+
+@inherits PageBase
+
+@if (PageState.Profile == null)
+{
+    <h3>Please select profile first</h3>
+}
+else
+{
+    @if (!PageState.ShowForm)
+    {
+        <button @onclick="()=> TuggleVisibleForm()" type="button">New Resume</button>
+    }
+    else
+    {
+        <button @onclick="()=> TuggleVisibleForm()" type="button">Hide Form</button>
+        <br />
+        <br />
+        <ResumeFormCpnt />
+    }
+
+    @if (resumes is null)
+    {
+        <p><em>Loading ...</em></p>
+    }
+    else
+    {
+        <br/>
+        <table >
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var resume in resumes)
+                {
+                    <tr>
+                        <td>@resume.FileName</td>
+                        <td>@resume.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
+

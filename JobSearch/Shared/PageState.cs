@@ -7,7 +7,8 @@ namespace JobSearch.Shared
     {     
         public DBModels.Profile Profile { get; set; }
         public event Action? OnChange;
-        
+        public bool ShowForm { get; set; } = false;
+
         public void NotifyStateChanged() => OnChange?.Invoke();
     }
 }

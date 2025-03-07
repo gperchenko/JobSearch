@@ -13,10 +13,46 @@ namespace JobSearch.Services
             _context = context;
         }
 
-        public async Task AddResume(Resume resume)
+        public async Task AddActivityAsync(Activity activity)
+        {
+            await _context.Activities.AddAsync(activity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddContactAsync(Contact contact)
+        {
+            await _context.Contacts.AddAsync(contact);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddResumeAsync(Resume resume)
         {
             await _context.Resumes.AddAsync(resume);
             await _context.SaveChangesAsync();
+        }
+
+        public Task<List<Activity>> GetActivitiesAsync(int profileId)
+        {
+            return _context.Activities
+                .Where(x => x.ProfileId == profileId)
+                .Include(x => x.RecruiterContact)
+                .Include(x => x.CompanyContact)
+                .Include(x => x.Resume)
+                .ToListAsync();
+        }
+
+        public Task<List<Contact>> GetContactsAsync(int profileId)
+        {
+            return _context.Contacts
+                .Where(x => x.ProfileId == profileId)
+                .ToListAsync();
+        }
+
+        public Task<List<Contact>> GetContactsAsync(int profileId, bool isHiring)
+        {
+            return _context.Contacts
+                .Where(x => x.ProfileId == profileId && x.IsHiring == isHiring)
+                .ToListAsync();
         }
 
         public Task<List<Resume>> GetResumesAsync(int profileId)
