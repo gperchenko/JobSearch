@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobSearch.Migrations
 {
     [DbContext(typeof(JobSearchContext))]
-    [Migration("20250127030301_init")]
+    [Migration("20250325022232_init")]
     partial class init
     {
         /// <inheritdoc />
