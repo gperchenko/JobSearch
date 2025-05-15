@@ -64,6 +64,7 @@ namespace JobSearch.Services
 
         public async Task<Profile> SwitchProfileAsync(string profileName)
         {
+            await Task.Delay(2000); // Simulate a delay for the demo
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.Name == profileName);
             if (profile == null)
             {

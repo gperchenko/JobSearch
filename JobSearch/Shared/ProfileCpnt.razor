@@ -16,10 +16,17 @@
                 <InputText id="profileName" @bind-Value="newProfile.Name" class="border-2 border-slate-300 bg-white flex-1 p-2 rounded-md" />
             </div>
             <div>
-                @loadedProfile
-                <button disabled="@loadedProfile" type="submit" class="@buttonCurrent">Submit</button>
+                @if (LoadingProfile)
+                {
+                    <p>LoadingProfile Profile</p>
+                }
+                else
+                {
+                  <button type="submit" class="@buttonCurrent">Submit</button>
+                }
             </div>
         </div>
     </EditForm>
 </div>
+
 
