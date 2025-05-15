@@ -2,22 +2,21 @@
 
 
 
-<div class="p-4">
+<div class="">
 
-    <div class="flex items-center align-center mb-2">
+    <div class="flex items-center align-center mb-2  focus:border-none">
         <h1 class="text-5xl">Profile: @PageState.Profile?.Name</h1>
     </div>
-    <EditForm Model="@newProfile" OnValidSubmit="@SwitchProfile" class="rounded-md border-slate-300 border-2">
+    <EditForm Model="@newProfile" OnValidSubmit="@SwitchProfile" class="rounded-t-md border-slate-300 border-2">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="bg-slate-200 p-3 flex gap-2">
             <div class="w-full flex items-center">
                 <label for="profileName" class="pr-2">Profile Name</label>
-                <InputText id="profileName" @bind-Value="newProfile.Name" class="border-2 border-slate-300 bg-white flex-1 p-2 rounded-md" />
+                <InputText placeholder="Enter A profile Name" id="profileName" @bind-Value="newProfile.Name" class="border-2 border-slate-300 bg-white flex-1 p-2 rounded-md" />
             </div>
             <div>
-                @loadedProfile
-                <button disabled="@loadedProfile" type="submit" class="@buttonCurrent">Submit</button>
+                <button disabled="@loadedProfile" type="submit" class="@buttonCurrent p-2 rounded-md border-2 border-blue-300/40">Submit</button>
             </div>
         </div>
     </EditForm>

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body, html {
+    height: 100%;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

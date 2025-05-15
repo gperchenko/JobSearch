@@ -1,11 +1,18 @@
 ﻿@inherits LayoutComponentBase
 
-<div>
-    
-    <ProfileCpnt />
-</div>
-<div>
-    <NavMenuCpnt />
+<div class="p-4 h-full">
+    <div>
+        <ProfileCpnt />
+    </div>
+    <div>
+        <NavMenuCpnt />
+    </div>
+
+    <main class="h-full"> 
+        <div class="bg-slate-200 h-full flex">
+
+            @Body
+        </div> 
+    </main>
 </div>
 
-<main> @Body </main>
