@@ -1,17 +1,40 @@
 ﻿@inherits PageBase
 
-<NavLink  href="" Match="NavLinkMatch.All">
-     Resume
-</NavLink>
-  &nbsp;|&nbsp;
-<NavLink href="ContactList" >
-    Contact
-</NavLink>
- &nbsp;|&nbsp;
-<NavLink href="ActivityLog" >
-    Activity Log
-</NavLink>
- &nbsp;|&nbsp;
-<NavLink href="Calendar">
-    Calendar
-</NavLink>
+<div class="flex flex-col bg-slate-300 p-2 place-center items-center">
+    <div class="flex gap-2">
+        @foreach (var link in Links)
+        {
+            <span class="border-r-2 last:border-none">
+                <NavLink ActiveClass="font-bold" Match="NavLinkMatch.All" href="@link.ElHref">
+                    @link.ElName
+                </NavLink>
+
+            </span>
+
+        }
+    </div>
+
+</div>
+
+@code{
+
+    public class Link
+    {
+        public string ElName { get; set; }
+        public string ElHref { get; set; }
+    }
+
+    List<Link> Links;
+
+    protected override void OnInitialized()
+    {
+        Links = new List<Link>
+        {
+            new Link { ElName = "Resume", ElHref = "" },
+            new Link { ElName = "Contact", ElHref = "ContactList" },
+            new Link { ElName = "Activity Log", ElHref = "ActivityLog" },
+            new Link { ElName = "Calendar", ElHref = "Calendar" }
+        };
+    }
+
+}
